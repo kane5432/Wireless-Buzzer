@@ -1,0 +1,92 @@
+esphome:
+  name: esphome-web-852fe4    # Change to match your ESP name
+  friendly_name: Buzzer
+  min_version: 2025.5.0
+  name_add_mac_suffix: false
+  on_boot:
+    priority: 800
+    then:
+      - component.update: battery_voltage    # Read immediately on power-up (triggers % below)
+
+esp32:
+  board: esp32-c6-devkitm-1
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+  encryption:
+    key: "CHANGE"
+
+ota:
+  platform: esphome
+  password: "CHANGE"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  power_save_mode: HIGH     # LIGHT is default on ESP32; HIGH saves more but may drop packets
+  output_power: 15dB       # Lower TX power if your AP is nearby
+  fast_connect: true        # Quicker joins (good with hidden SSIDs); may pick suboptimal AP
+  manual_ip:                # Static IP avoids DHCP delay, change IP or remove completely
+    static_ip: 192.168.1.50
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+    
+output:
+  - platform: gpio
+    pin: GPIO2    # Change depending on your GPIO pin
+    id: buzzer_out
+
+switch:
+  - platform: template
+    name: "Buzzer"
+    id: ha_buzzer_switch
+    turn_on_action:
+      - output.turn_on: buzzer_out
+      - delay: 1s
+      - output.turn_off: buzzer_out
+      - switch.turn_off: ha_buzzer_switch
+    turn_off_action:
+      - output.turn_off: buzzer_out
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/lboue/esphome
+      ref: adc_oneshot
+    components: [adc]
+    refresh: 0s
+
+sensor:
+  - platform: adc
+    name: "Buzzer Battery Voltage"
+    pin: GPIO0    
+    id: battery_voltage
+    update_interval: 900s                 # 15 minutes, adjust as neccessary
+    filters:
+      - multiply: 2.0
+    on_value:
+      then:
+        - component.update: battery_level # Recompute % immediately after each voltage read
+
+  - platform: template
+    name: "Buzzer Battery Level"
+    id: battery_level
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: never                # Only update when voltage updates (via on_value)
+    lambda: |-
+      float v = id(battery_voltage).state;
+      if (v > 4.20) return 100;
+      if (v < 3.20) return 0;
+      const float voltages[]    = {4.20, 4.00, 3.85, 3.75, 3.65, 3.55, 3.40, 3.20};
+      const float percentages[] = {100,   85,   70,   55,   40,   25,   10,    0};
+      for (int i = 0; i < 7; i++) {
+        if (v >= voltages[i+1]) {
+          float slope = (percentages[i+1] - percentages[i]) / (voltages[i+1] - voltages[i]);
+          return percentages[i] + slope * (v - voltages[i]);
+        }
+      }
+      return 0;
