@@ -1,6 +1,6 @@
 # Wireless Buzzer with ESP32-C6 + Home Assistant
 
-This project is a **battery-powered, Wi-Fi-connected buzzer** built using an **ESP32-C6** and controlled via **Home Assistant**. I originally made it as a prank — I hid it in my sister’s room and triggered random buzzes from my phone.
+This project is a battery-powered, Wi-Fi-connected buzzer built using an ESP32-C6 and controlled via Home Assistant. I originally made it as a prank, I hid it in my sister’s room and triggered random buzzes from my phone.
 
 Despite being a bit of fun, this device shows off practical ESPHome integrations like battery monitoring, voltage dividers, and remote triggering via Wi-Fi.
 
@@ -63,9 +63,9 @@ This is implemented in the `lambda` using a simple interpolation algorithm in ES
 
 ## ESPHome YAML Highlights
 
-- Reads **battery voltage on boot**
-- Updates **voltage and percentage every 5 minutes**
-- Buzzer is controlled via a **template switch**
+- Reads battery voltage on boot
+- Updates voltage and percentage every 5 minutes
+- Buzzer is controlled via a template switch
 - Uses external ADC component (`adc_oneshot`)
 
 ---
@@ -85,21 +85,21 @@ You can automate it, display it on your dashboard, or manually trigger buzzes fr
 ## Files in this Repo
 
 - `buzzer.yaml` – ESPHome config
-- `buzzer_case.stl` – Optional 3D-printed case (will be added)
-- `wiring-diagram.png` – Basic wiring overview (will be added)
+- `Buzzer Housing 3D Print.stl` and `Buzzer Lid 3D Print.stl` – Optional 3D-printed case 
+- `Buzzer Schematics.png` – Basic wiring overview
 
 ---
 
 ## Future Improvements
 
-- Switch from Wi-Fi to **Zigbee** for lower power draw
-- Add **deep sleep** when using Zigbee
+- Switch from Wi-Fi to Zigbee for lower power draw
+- Add deep sleep when using Zigbee
 - Tune the battery lookup table using real test data
 
 ---
 
 ## License
 
-MIT — feel free to fork, modify, and share.
+MIT - feel free to fork, modify, and share.
 
 
