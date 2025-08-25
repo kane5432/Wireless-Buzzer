@@ -85,9 +85,8 @@ You can automate it, display it on your dashboard, or manually trigger buzzes fr
 ## Files in this Repo
 
 - `buzzer.yaml` – ESPHome config
-- `buzzer_case.stl` – Optional 3D-printed case
-- `wiring-diagram.png` – Basic wiring overview
-- `README.md` – This file
+- `buzzer_case.stl` – Optional 3D-printed case (will be added)
+- `wiring-diagram.png` – Basic wiring overview (will be added)
 
 ---
 
