@@ -21,10 +21,11 @@ Despite being a bit of fun, this device shows off practical ESPHome integrations
 
 ## Hardware Used
 
-- [XIAO ESP32-C6 Dev Board](https://wiki.seeedstudio.com/XIAO_ESP32C6_Getting_Started/)
-- Active Buzzer (3.3V or 5V)
+- [XIAO ESP32-C6 Dev Board](https://s.click.aliexpress.com/e/_ol3B2OP)
+- [Active Buzzer (3.3V or 5V)](https://s.click.aliexpress.com/e/_oCSsUbv)
+- [2 × 200kΩ resistors (for voltage divider)](https://s.click.aliexpress.com/e/_ooGuPLW)
+- [Soldering Iron](https://s.click.aliexpress.com/e/_ol3ivQL)
 - 3.7V Li-ion Battery
-- 2 × 200kΩ resistors (for voltage divider)
 - Optional: 3D-printed case (STL included)
 
 ---
@@ -65,7 +66,7 @@ This is implemented in the `lambda` using a simple interpolation algorithm in ES
 - Reads **battery voltage on boot**
 - Updates **voltage and percentage every 5 minutes**
 - Buzzer is controlled via a **template switch**
-- Uses [external ADC component (`adc_oneshot`)](https://github.com/lboue/esphome/tree/adc_oneshot)
+- Uses external ADC component (`adc_oneshot`)
 
 ---
 
