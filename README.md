@@ -98,6 +98,10 @@ You can automate it, display it on your dashboard, or manually trigger buzzes fr
 
 ---
 
+## Support this project
+If you found this project helpful, you can support my work here:  
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-yellow?logo=buy-me-a-coffee)](https://buymeacoffee.com/kanejarrats)
 ## License
 
 MIT - feel free to fork, modify, and share.
